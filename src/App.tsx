@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
       {value === 0 ? (
-        <p className="mt-20 font-medium mb-1">Countdown is not running</p>
+        <p className=" font-medium mb-1">Countdown is not running</p>
       ) : (
         <p className="mt-20 font-medium mb-1">
           Countdown Started for {value} minutes
@@ -55,7 +55,7 @@ function App() {
             type="number"
             className="w-fit"
             size="lg"
-            value={counter.toString()}
+            value={counter === 0 ? "" : counter.toString()}
             placeholder="Ex: 10 minutes"
             onChange={(e) => setCounter(Number(e.target.value))}
             onKeyDown={handleEnter}
