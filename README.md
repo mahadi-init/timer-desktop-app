@@ -1,7 +1,41 @@
-# Tauri + React + Typescript
+# Timer App
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+Build with Rust + Tauri + React
 
-## Recommended IDE Setup
+![app screenshot](./screenshot/home.png)
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+### What's the purpose:
+
+Simple, Counting time backward. Enter a time such as, 10 mintues and it will
+count backward. 10 min -> 9 min -> 8...
+
+### Specialty:
+
+1. Build with **RUST** based framework.
+1. Cross platform
+1. Small bundle size
+1. Fast Startup
+
+### Instructions:
+
+_Prerequisites :_ Rust required to installed in the development system.
+
+Install dependencies
+
+```shell
+bun install  //npm or pnpm
+```
+
+Dev mode
+
+```shell
+bun run dev
+```
+
+Build Image
+
+```shell
+bun run tauri build
+```
+
+**That's It. Happy to receive any kind of feedback or contribution**
