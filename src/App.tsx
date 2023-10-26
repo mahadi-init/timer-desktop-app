@@ -1,21 +1,24 @@
 import { Button, Input } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { LuTimerReset } from "react-icons/lu";
+import { AiOutlinePause } from "react-icons/ai";
+import { BsPlay } from "react-icons/bs";
 
 function App() {
   const [value, setValue] = useState(0);
   const [counter, setCounter] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (timeLeft !== 0) {
+    if (timeLeft !== 0 && !isPaused) {
       const timeout = setTimeout(() => {
         setTimeLeft(timeLeft - 1);
       }, 60000);
 
       return () => clearTimeout(timeout);
     }
-  }, [timeLeft]);
+  }, [timeLeft, isPaused]);
 
   const handleEnter = (e: any) => {
     if (e.key === "Enter") {
@@ -27,6 +30,12 @@ function App() {
     }
   };
 
+  const handlePause = () => {
+    if (timeLeft === 0) return;
+
+    setIsPaused(!isPaused);
+  };
+
   const handleReset = () => {
     setTimeLeft(0);
     setCounter(0);
@@ -35,10 +44,16 @@ function App() {
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
+      <p
+        style={{ fontFamily: "cursive" }}
+        className="text-7xl text-orange-500 mb-16 font-bold tracking-widest"
+      >
+        Timer
+      </p>
       {value === 0 ? (
-        <p className=" font-medium mb-1">Countdown is not running</p>
+        <p className="font-medium mb-1">Countdown is not running</p>
       ) : (
-        <p className="mt-20 font-medium mb-1">
+        <p className="font-medium mb-1">
           Countdown Started for {value} minutes
         </p>
       )}
@@ -52,7 +67,6 @@ function App() {
         <div className="flex items-center gap-5">
           <p className="text-2xl font-medium">Enter The time</p>
           <Input
-            type="number"
             className="w-fit"
             size="lg"
             value={counter === 0 ? "" : counter.toString()}
@@ -61,9 +75,20 @@ function App() {
             onKeyDown={handleEnter}
           />
           <Button
+            startContent={
+              isPaused ? <BsPlay size={18} /> : <AiOutlinePause size={18} />
+            }
+            onClick={handlePause}
+            variant="solid"
+            color="secondary"
+          >
+            {isPaused ? "Play" : "Pause"}
+          </Button>
+          <Button
             startContent={<LuTimerReset size={18} />}
             onClick={handleReset}
             variant="solid"
+            color="danger"
           >
             Reset
           </Button>
