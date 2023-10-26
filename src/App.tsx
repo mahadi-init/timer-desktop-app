@@ -44,12 +44,6 @@ function App() {
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <p
-        style={{ fontFamily: "cursive" }}
-        className="text-7xl text-orange-500 mb-16 font-bold tracking-widest"
-      >
-        Timer
-      </p>
       {value === 0 ? (
         <p className="font-medium mb-1">Countdown is not running</p>
       ) : (
