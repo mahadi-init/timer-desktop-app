@@ -6,7 +6,7 @@ Build with Rust + Tauri + React
 
 ### What's the purpose:
 
-Simple, Counting time backward. Enter a time such as, 10 mintues and it will
+Simple, Counting time backward. Enter a time such as, 10 minutes and it will
 count backward. 10 min -> 9 min -> 8...
 
 ### Specialty:
