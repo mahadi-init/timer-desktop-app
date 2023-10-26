@@ -21,7 +21,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.stopwatch",
+      "identifier": "com.tauri.timer",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -37,9 +37,11 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "timer",
+        "title": "Timer",
         "width": 800,
-        "height": 600
+        "height": 700,
+        "minWidth": 800,
+        "minHeight": 700
       }
     ]
   }
