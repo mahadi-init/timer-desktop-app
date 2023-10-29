@@ -1,14 +1,19 @@
-import { Button, Input } from "@nextui-org/react";
+import { useDisclosure } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { LuTimerReset } from "react-icons/lu";
-import { AiOutlinePause } from "react-icons/ai";
-import { BsPlay } from "react-icons/bs";
+import {
+  CounterView,
+  HistoryModal,
+  InputGroup,
+  ButtonGroup,
+} from "./components/get-components";
 
 function App() {
   const [value, setValue] = useState(0);
+  const [title, setTitle] = useState<string>();
   const [counter, setCounter] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     if (timeLeft !== 0 && !isPaused) {
@@ -20,6 +25,7 @@ function App() {
     }
   }, [timeLeft, isPaused]);
 
+
   const handleEnter = (e: any) => {
     if (e.key === "Enter") {
       if (counter <= 0) return;
@@ -27,6 +33,9 @@ function App() {
       setValue(counter);
       setTimeLeft(counter);
       setCounter(0);
+
+      console.log(title);
+      //TODO: Add title in history
     }
   };
 
@@ -44,50 +53,26 @@ function App() {
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
-      {value === 0 ? (
-        <p className="font-medium mb-1">Countdown is not running</p>
-      ) : (
-        <p className="font-medium mb-1">
-          Countdown Started for {value} minutes
-        </p>
-      )}
-      <div className="border-2 p-12 rounded-lg border-red-400 shadow-red-400 shadow-lg">
-        <p className="text-4xl tracking-widest font-extrabold">
-          <span>{timeLeft}</span> minutes left
-        </p>
-      </div>
-
+      <CounterView value={value} timeLeft={timeLeft} />
       <div className="mt-12 border-2 p-12 rounded-lg border-pink-400 shadow-pink-400 shadow-lg">
-        <div className="flex items-center gap-5">
-          <p className="text-2xl font-medium">Enter The time</p>
-          <Input
-            className="w-fit"
-            size="lg"
-            value={counter === 0 ? "" : counter.toString()}
-            placeholder="Ex: 10 minutes"
-            onChange={(e) => setCounter(Number(e.target.value))}
-            onKeyDown={handleEnter}
+        <div className="px-12 flex flex-col items-center gap-8">
+          <InputGroup
+            setTitle={setTitle}
+            setCounter={setCounter}
+            handleEnter={handleEnter}
           />
-          <Button
-            startContent={
-              isPaused ? <BsPlay size={18} /> : <AiOutlinePause size={18} />
-            }
-            onClick={handlePause}
-            variant="solid"
-            color="secondary"
-          >
-            {isPaused ? "Play" : "Pause"}
-          </Button>
-          <Button
-            startContent={<LuTimerReset size={18} />}
-            onClick={handleReset}
-            variant="solid"
-            color="danger"
-          >
-            Reset
-          </Button>
+          <ButtonGroup
+            isPaused={isPaused}
+            handlePause={handlePause}
+            handleReset={handleReset}
+          />
         </div>
       </div>
+      <HistoryModal
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onOpenChange={onOpenChange}
+      />
     </div>
   );
 }
