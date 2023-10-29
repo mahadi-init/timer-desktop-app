@@ -23,19 +23,19 @@ _Prerequisites :_ Rust required to installed in the development system.
 Install dependencies
 
 ```shell
-bun install  //npm or pnpm
+npm install  //yarn or pnpm
 ```
 
 Dev mode
 
 ```shell
-bun run dev
+npm run dev
 ```
 
 Build Image
 
 ```shell
-bun run tauri build
+npm run tauri build
 ```
 
 **That's It. Happy to receive any kind of feedback or contribution**
