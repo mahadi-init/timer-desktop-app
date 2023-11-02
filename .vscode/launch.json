@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "type": "firefox",
+      "name": "Debug",
+      "request": "launch",
+      "url": "http://localhost:1420/"
+    }
+  ]
+}

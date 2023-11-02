@@ -1,14 +1,16 @@
 import { Input } from "@nextui-org/react";
+import { useState } from "react";
 
 export default function InputGroup({
-  setTitle,
-  setCounter,
-  handleEnter,
+  isActive,
+  handleStart,
 }: {
-  setTitle: (arg0: string) => void;
-  setCounter: (arg0: number) => void;
-  handleEnter: (arg0: any) => void;
+  isActive: boolean;
+  handleStart: (arg0: string, arg1: number) => void;
 }) {
+  const [initialTitle, setInitialTitle] = useState("");
+  const [initialTimer, setInitialTimer] = useState("");
+
   return (
     <div className="flex flex-col gap-8">
       <div className="flex items-center gap-4">
@@ -16,9 +18,10 @@ export default function InputGroup({
         <Input
           className="w-fit"
           size="lg"
+          value={initialTitle}
           placeholder="Leetcode Problem 1001"
-          onChange={(e) => setTitle(e.target.value)}
-          onKeyDown={handleEnter}
+          onChange={(e) => setInitialTitle(e.target.value)}
+          disabled={isActive}
         />
       </div>
       <div className="flex items-center gap-4">
@@ -26,9 +29,19 @@ export default function InputGroup({
         <Input
           className="w-fit"
           size="lg"
+          value={initialTimer}
           placeholder="Ex: 10 minutes"
-          onChange={(e) => setCounter(Number(e.target.value))}
-          onKeyDown={handleEnter}
+          onChange={(e) => {
+            if (!isNaN(Number(e.target.value))) setInitialTimer(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleStart(initialTitle, Number(initialTimer));
+              setInitialTitle("");
+              setInitialTimer("");
+            }
+          }}
+          disabled={isActive}
         />
       </div>
     </div>
