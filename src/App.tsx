@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import TimerStore from "./utils/timer-store";
 import {
   CounterView,
   InputGroup,
@@ -7,6 +5,7 @@ import {
   HistoryModal,
 } from "./components/get-components";
 import { useDisclosure } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [title, setTitle] = useState<string>();
@@ -14,8 +13,6 @@ function App() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const [timerStore, setTimerStore] = useState(new TimerStore());
-  const [timerStores, setTimerStores] = useState([timerStore]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
@@ -51,28 +48,13 @@ function App() {
     setMinutes(initialTimer);
     setSeconds(0);
 
-    timerStore.setTitle(initialTitle);
-    timerStore.setTime(initialTimer);
-
     setIsActive(true);
-  };
-
-  const addMinutes = () => {
-    if (minutes == 0) return;
-    setMinutes((prev) => prev + 5);
-  };
-
-  const removeMinutes = () => {
-    if (minutes == 0) return;
-    if (minutes - 5 < 0) return 0;
-    setMinutes((prev) => prev - 5);
   };
 
   const handlePause = () => {
     if (minutes == 0) return;
 
     setIsActive(!isActive);
-    timerStore.setPauses(`${minutes}:${seconds}`);
   };
 
   const handleReset = () => {
@@ -81,8 +63,6 @@ function App() {
     setTitle(undefined);
     setMinutes(0);
     setSeconds(0);
-
-    setTimerStores([...timerStores, timerStore]);
   };
 
   return (
@@ -107,8 +87,8 @@ function App() {
           <InputGroup handleStart={handleStart} isActive={isActive} />
           <ButtonGroup
             isActive={isActive}
-            addMinutes={addMinutes}
-            removeMinutes={removeMinutes}
+            minutes={minutes}
+            setMinutes={setMinutes}
             handlePause={handlePause}
             handleReset={handleReset}
           />
@@ -119,7 +99,7 @@ function App() {
           isOpen={isOpen}
           onOpen={onOpen}
           onOpenChange={onOpenChange}
-          timerStores={timerStores}
+          // timerStores={timerStores}
         />
       </div>
     </div>

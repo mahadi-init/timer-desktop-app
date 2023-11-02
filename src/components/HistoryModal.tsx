@@ -14,7 +14,7 @@ interface ModalProps {
   isOpen: boolean;
   onOpen: () => void;
   onOpenChange: () => void;
-  timerStores: TimerStore[];
+  // timerStores: TimerStore[];
 }
 
 export default function HistoryModal(props: ModalProps): JSX.Element {
@@ -37,7 +37,7 @@ export default function HistoryModal(props: ModalProps): JSX.Element {
               <ModalHeader className="flex flex-col gap-1">
                 Timer History
               </ModalHeader>
-              <ModalBody>
+              {/* <ModalBody>
                 {props.timerStores.map((item) => {
                   return (
                     <Card className="max-w-[400px]">
@@ -59,7 +59,7 @@ export default function HistoryModal(props: ModalProps): JSX.Element {
                     </Card>
                   );
                 })}
-              </ModalBody>
+              </ModalBody> */}
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close

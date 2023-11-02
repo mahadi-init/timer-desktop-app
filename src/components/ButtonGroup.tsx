@@ -6,17 +6,29 @@ import { LuPlus, LuMinus } from "react-icons/lu";
 
 export default function ButtonGroup({
   isActive,
-  addMinutes,
-  removeMinutes,
+  minutes,
+  setMinutes,
   handlePause,
   handleReset,
 }: {
   isActive: boolean;
-  addMinutes: () => void;
-  removeMinutes: () => void;
+  minutes: number;
+  setMinutes: React.Dispatch<React.SetStateAction<number>>;
   handlePause: () => void;
   handleReset: () => void;
 }) {
+  const addMinutes = () => {
+    if (minutes == 0) return;
+    setMinutes((prev) => prev + 5);
+  };
+
+  const removeMinutes = () => {
+    if (minutes == 0) return;
+    if (minutes - 5 < 0) return 0;
+
+    setMinutes((prev) => prev - 5);
+  };
+
   return (
     <div className="flex gap-8">
       <Button
