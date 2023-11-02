@@ -19,7 +19,7 @@ export default function HistoryModal(props: ModalProps): JSX.Element {
     <div className="flex flex-col gap-2">
       <button
         onClick={props.onOpen}
-        className="mt-16 bg-transparent bg-gray-800 bg-opacity-50 p-2 rounded-full"
+        className="bg-transparent bg-gray-800 bg-opacity-50 p-2 rounded-full"
       >
         <GoHistory size={48} />
       </button>

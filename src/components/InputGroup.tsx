@@ -1,13 +1,15 @@
 import { Input } from "@nextui-org/react";
 
 export default function InputGroup({
+  isActive,
   setTitle,
-  setCounter,
-  handleEnter,
+  setTimer,
+  handleStart,
 }: {
+  isActive: boolean;
   setTitle: (arg0: string) => void;
-  setCounter: (arg0: number) => void;
-  handleEnter: (arg0: any) => void;
+  setTimer: (arg0: number) => void;
+  handleStart: (arg0: any) => void;
 }) {
   return (
     <div className="flex flex-col gap-8">
@@ -18,7 +20,7 @@ export default function InputGroup({
           size="lg"
           placeholder="Leetcode Problem 1001"
           onChange={(e) => setTitle(e.target.value)}
-          onKeyDown={handleEnter}
+          disabled={isActive}
         />
       </div>
       <div className="flex items-center gap-4">
@@ -27,8 +29,12 @@ export default function InputGroup({
           className="w-fit"
           size="lg"
           placeholder="Ex: 10 minutes"
-          onChange={(e) => setCounter(Number(e.target.value))}
-          onKeyDown={handleEnter}
+          onChange={(e) => {
+            if (!isNaN(Number(e.target.value)))
+              setTimer(Number(e.target.value));
+          }}
+          onKeyDown={handleStart}
+          disabled={isActive}
         />
       </div>
     </div>
